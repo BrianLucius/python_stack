@@ -11,7 +11,7 @@ class BankAccount:
         self.balance += amount
         return self
 
-    def withdrawl(self, amount):
+    def withdraw(self, amount):
         if self.balance >= amount:
             self.balance -= amount
         else:
@@ -44,8 +44,8 @@ class User:
     def make_deposit(self, amount):
         self.account.deposit(amount)
 
-    def make_withdrawl(self, amount):
-        self.account.withdrawl(amount)
+    def make_withdraw(self, amount):
+        self.account.withdraw(amount)
 
     def display_user_balance(self):
         self.account.display_account_info()
@@ -60,7 +60,7 @@ print(f"\nName: {user_alice.name} \nEmail: {user_alice.email} \nBalance: {user_a
 user_john.make_deposit(100)
 print(f"\nName: {user_john.name} \nEmail: {user_john.email} \nBalance: {user_john.account.balance} \nInterest Rate: {user_john.account.interest_rate}")
 
-user_john.make_withdrawl(50)
+user_john.make_withdraw(50)
 print(f"\nName: {user_john.name} \nEmail: {user_john.email} \nBalance: {user_john.account.balance} \nInterest Rate: {user_john.account.interest_rate}")
 
 user_john.display_user_balance()

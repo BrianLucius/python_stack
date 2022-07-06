@@ -10,7 +10,7 @@ class BankAccount:
         self.balance += amount
         return self
 
-    def withdrawl(self, amount):
+    def withdraw(self, amount):
         if self.balance >= amount:
             self.balance -= amount
         else:
@@ -39,6 +39,6 @@ user1 = BankAccount(balance=10000, interest_rate=.10)
 user2 = BankAccount(interest_rate=.20)
 
 user1.deposit(100).deposit(300).deposit(75).yield_interest().display_account_info()
-user2.deposit(1245).deposit(412).withdrawl(11124).withdrawl(73).withdrawl(154).withdrawl(23).yield_interest().display_account_info()
+user2.deposit(1245).deposit(412).withdraw(11124).withdraw(73).withdraw(154).withdraw(23).yield_interest().display_account_info()
 
 BankAccount.print_bank_accounts()
