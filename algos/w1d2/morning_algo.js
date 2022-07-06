@@ -92,13 +92,3 @@ console.log(acronymize(str6)) // Expected: APIE
 console.log(acronymize(str7)) // Expected: SDLC
 //BONUS TEST CASE
 console.log(acronymize(str8)) // Expected: GIT
-
-
-I pushed our algo collab to my repo after putting the finishing touches on the acronymize function.
-Here's the link if you'd like a copy for reference:
-https://github.com/BrianLucius/python_stack/blob/main/algos/w1d2/morning_algo.js
-
-thiery
-cade
-elijah
-camden
