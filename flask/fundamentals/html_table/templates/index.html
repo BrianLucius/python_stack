@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>HTML Users Table</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    </head>
+    <body>
+        <table class="table text-center mt-4 mx-auto w-50 table-dark table-striped table-hover">
+            <thead class="thead-dark text-warning">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Full Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{user['first_name']}}</td>
+                        <td>{{user['last_name']}}</td>
+                        <td>{{user['first_name']}} {{user['last_name']}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <script src="" async defer></script>
+    </body>
+</html>
