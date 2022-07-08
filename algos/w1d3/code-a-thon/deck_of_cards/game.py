@@ -1,5 +1,4 @@
 from classes.deck import Deck
-import random
 
 bicycle = Deck()
 
@@ -8,36 +7,42 @@ bicycle.shuffle_cards()
 bicycle.player_hand()
 bicycle.computer_hand()
 
-print("player")
-bicycle.show_player_hand()
-print("computer")
-bicycle.show_computer_hand()
+player_discard_stack = bicycle.discard_stack()
+computer_discard_stack = bicycle.discard_stack()
+
+# print("\n***** player *****")
+# bicycle.show_player_hand()
+# bicycle.player_hand().pop(0)
+
+# print("\n***** computer *****")
+# bicycle.show_computer_hand()
+
+print(" ******* THIS IS WAR!!! *******")
+while len(bicycle.player_hand()) > 0 and len(bicycle.computer_hand()) > 0:
+    player1 = input("Press enter to play a card!")
+
+    print("Your card: ")
+    bicycle.player_hand()[0].card_info()
+
+    [print("The computer's card: ")]
+    bicycle.computer_hand()[0].card_info()
+
+    if bicycle.player_hand()[0].point_val > bicycle.computer_hand()[0].point_val:
+        print("You win this round and take the cards!")
+        player_discard_stack.discards.append(bicycle.player_hand()[0])
+        player_discard_stack.discards.append(bicycle.computer_hand()[0])
+        bicycle.player_hand().pop(0)
+        bicycle.computer_hand().pop(0)
+    elif bicycle.player_hand()[0].point_val < bicycle.computer_hand()[0].point_val:
+        print("You lost this round. Computer takes the cards")
+        computer_discard_stack.discards.append(bicycle.player_hand()[0])
+        computer_discard_stack.discards.append(bicycle.computer_hand()[0])
+        bicycle.player_hand().pop(0)
+        bicycle.computer_hand().pop(0)
 
 
-# bicycle.show_cards()  # deck
 
-
-# player_hand.show_cards()
-
-# print(player_hand)
-
-# player_hand.card_info()
-
-# player_hand = bicycle.cards[0:25]
-# print(player_hand.card_info()
-
-# bicycle.cards[0].card_info()
-
-
-# mylist = ["apple", "banana", "cherry"]
-# random.shuffle(mylist)
-
-# print(mylist)
-
-
-# random_number = Math.random(1..52)
-# player_hand.append(self.cards[random_number])
-
+#
 
 # War
 #     Real player vs computer
@@ -51,7 +56,7 @@ bicycle.show_computer_hand()
 # Randomize cards into two separate dictionaries (player_hand dict, computer_hand dict) (player_disc dict, computer_disc dict)
 #     Player uses a keyboard input to place a card in the "playfield"
 #     Computer place a card after player places a card
-#     Compare the cards, winner adds both cards to their ownn discard stack
+#     Compare the cards, winner adds both cards to their own discard stack
 #     check each player to see if there or no cards left in their hand, 
 #         if no cards in hand, shuffle your discard stack, this is new hand
 #     repeat play until one players discard stack is empty

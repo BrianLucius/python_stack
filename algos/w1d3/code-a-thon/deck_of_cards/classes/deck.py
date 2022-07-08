@@ -1,9 +1,7 @@
-from . import card
 import random
+from . import card
 
 class Deck:
-
-
     def __init__( self ):
         suits = [ "spades" , "hearts" , "clubs" , "diamonds" ]
         self.cards = []
@@ -26,23 +24,25 @@ class Deck:
     def show_cards(self):
         for card in self.cards:
             card.card_info()
-            
+
     def shuffle_cards(self):
         random.shuffle(self.cards)
-        
+        return self
+
     def player_hand(self):
-        # half = parseInt(len(self.cards)/2)
-        return self.cards[0:25]
-    
+        return self.cards[0:26]
+
     def show_player_hand(self):
         for card in self.player_hand():
             card.card_info()
-    
+
     def computer_hand(self):
-        # half = parseInt(len(self.cards)/2)
-        return self.cards[26:51]
-        
+        return self.cards[26:52]
+
     def show_computer_hand(self):
         for card in self.computer_hand():
             card.card_info()
 
+    def discard_stack(self):
+        self.discards = []
+        return self
