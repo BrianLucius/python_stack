@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Playground</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {
+                display: flex;
+                justify-content: space-evenly;
+                flex-wrap: wrap;
+                align-items: center;
+                padding: 0px 30px;
+            }
+
+            .beautifulBox {
+                border: 2px solid grey;
+                border-radius: 20px;
+                height: 150px;
+                width: 150px;
+                margin: 15px;
+                background-color: {{boxColor}};
+                box-shadow: black 3px 3px;
+
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        {% for i in range(0,numBoxes)%}
+            <div class="beautifulBox"></div>
+        {% endfor %}
+        <script src="" async defer></script>
+    </body>
+</html>
