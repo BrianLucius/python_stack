@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>The Great Number Game!</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    </head>
+    <body>
+        <div class="container text-center w-75 rounded-bottom rounded-3 bg-light bg-gradient border border-dark mt-3 pb-5">
+                <h1 class = "bg-dark text-light rounded-bottom mb-2 p-2">Welcome to the Great Number Game!!!</h1>
+                <h4 class="text-primary mb-2">I am thinking of a number between 1 and 100</h4>
+                <div>
+                    {% if hint == 'higher' %}
+                        <div class="container-fluid rounded w-50 bg-warning text-center p-5 mb-3">
+                            <h5>Too Low!</h5>
+                        </div>
+                    {% elif hint == 'lower' %}
+                    <div class="container-fluid rounded w-50 bg-danger text-center p-5 mb-3">
+                        <h5>Too High!</h5>
+                    </div>
+                    {% elif hint == 'match' %}
+                    <div class="container-fluid rounded w-50 bg-success text-center p-5 mb-3 text-light">
+                        <h5 class="mb-4">You guessed it!! The number is {{random_num}}</h5>
+                        <button class="btn btn-success border" onclick = "location.href = 'http://localhost:5001/play_again';">Play Again?</button>
+                    </div>
+                    {% else: %}
+                        <p></p>
+                    {% endif %}
+                </div>
+                {% if hint != 'match' %}
+                <div class="container-fluid w-50 text-center">
+                    <form class="bg-dark rounded p-3" action="/guess" method="post">
+                        <div><label class="mb-2 text-warning p-2" for="guess">Take a Guess!!!</label></div>
+                        <div><input class="mb-3" class="form-control" type="number" name="guess"></div>
+                        <div><input class="btn btn-outline-primary" type="submit" value="Guess!"></div>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+    </body>
+</html>
