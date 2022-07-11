@@ -52,6 +52,23 @@ const expected3 = {};
     return frequency;
 }
 
+//more efficient solution:
+function makeFrequencyTable(arr) {
+    let freq = {};
+    for (let elem of arr){
+        freq.hasOwnProperty(elem) ? freq[elem]++ : freq[elem] = 1;
+        //  condition             ?  if true     :    if false
+        /*
+        if (freq.hasOwnProperty(elem)){
+            freq[elem]++
+        } else {
+            freq[elem] = 1
+        }
+        */
+    }
+    return freq;
+}
+
 console.log(makeFrequencyTable(arr1)) 
 console.log("Expected: ", expected1);
 console.log(makeFrequencyTable(arr2)) 
@@ -99,6 +116,17 @@ function oddOccurrencesInArray(nums) {
         }
     }
 }
+
+// more efficient solution
+function oddOccurrencesInArray(nums) {
+    //Your code here
+    let freq = makeFrequencyTable(nums);
+    for (let key in freq){
+        if (freq[key] % 2 !== 0){
+            return parseInt(key);
+        }
+    }
+    return false;
 
 console.log(oddOccurrencesInArray(numsA), "should equal", expectedA);
 console.log(oddOccurrencesInArray(numsB), "should equal", expectedB);
