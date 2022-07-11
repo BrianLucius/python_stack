@@ -28,13 +28,19 @@
                     {% elif hint == 'match' %}
                     <div class="container-fluid rounded w-50 bg-success text-center p-5 mb-3 text-light">
                         <h5 class="mb-4">You guessed it!! The number is {{random_num}}</h5>
+                        <h5 class="mb-4">It took {{guesses}} guesses.</h5>
                         <button class="btn btn-success border" onclick = "location.href = 'http://localhost:5001/play_again';">Play Again?</button>
+                    </div>
+                    {% elif hint == 'lose' %}
+                    <div class="container-fluid rounded w-50 bg-danger text-center p-5 mb-3 text-light">
+                        <h5 class="mb-4">You lose!! The number is {{random_num}}</h5>
+                        <button class="btn btn-danger border" onclick = "location.href = 'http://localhost:5001/play_again';">Play Again?</button>
                     </div>
                     {% else: %}
                         <p></p>
                     {% endif %}
                 </div>
-                {% if hint != 'match' %}
+                {% if hint != 'match' and hint != 'lose' %}
                 <div class="container-fluid w-50 text-center">
                     <form class="bg-dark rounded p-3" action="/guess" method="post">
                         <div><label class="mb-2 text-warning p-2" for="guess">Take a Guess!!!</label></div>
