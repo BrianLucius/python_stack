@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Dojo Survey</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    </head>
+    <body>
+        <div class = "container w-50 border bg-dark text-light p-4 mt-4 rounded">
+            <h1 class = "text-center bg-dark text-warning mb-2 p-2">Coding Dojo Survey</h1>
+            <form action="/process" method="post">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Your Name:</label>
+                    <input class="form-control" type="text" name="name" id="name">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Dojo Location:</label>
+                    <select class="form-control" name="location" id="location">
+                        <option value="Chicago">Chicago</option>
+                        <option value="Los Angeles">Los Angeles</option>
+                        <option value="Online">Online</option>
+                        <option value="San Jose">San Jose</option>
+                        <option value="Seattle">Seattle</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="fav_lang">Favorite Language:</label>
+                    <select class="form-control" name="fav_lang" id="fav_lang">
+                        <option value="Python">Python</option>
+                        <option value="Java">Java</option>
+                        <option value="C#">C#</option>
+                        <option value="JS">Java Script</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <p>Select Your Experience Level:</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="experience_level" id="noob" value="Noob" checked>
+                        <label class="form-check-label" for="noob">Noob</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="experience_level" id="intermediate" value="Intermediate">
+                        <label class="form-check-label" for="intermediate">Intermediate</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="experience_level" id="advanced" value="Advanced">
+                        <label class="form-check-label" for="advanced">Advanced</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="experience_level" id="ninja" value="Ninja">
+                        <label class="form-check-label" for="Ninja">Ninja</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <p>Select Newsletter Subscriptions:</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="newsletter_subscriptions" value="Coding Tips" checked>
+                        <label class="form-check-label" for="coding_tips">Coding Tips</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="newsletter_subscriptions" value="Upcoming Classes">
+                        <label class="form-check-label" for="upcoming_classes">Upcoming Classes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="newsletter_subscriptions" value="Career Search Tips">
+                        <label class="form-check-label" for="career_search_tips">Career Search Tips</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="newsletter_subscriptions" value="Networking Ideas">
+                        <label class="form-check-label" for="networking_ideas">Networking Ideas</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="comment">Comment (optional):</label>
+                    <textarea class="form-control" name="comment" id="comment" rows="5"></textarea>
+                </div>
+                <div>
+                    <input class="btn btn-primary" type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
