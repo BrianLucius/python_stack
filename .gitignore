@@ -16,6 +16,8 @@ x_*
 # Ignore py cache files
 *.pyc
 
-# Ignore ERD files
+# Ignore MySQL Workbench files
 *.mwb
 *.mwb.*
+*.sql
+*.pdf
