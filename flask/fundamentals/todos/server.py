@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, session  # Import Flask to allow us to create our app
+from todo import Todo
 app = Flask(__name__)    # Create a new instance of the Flask class called "app"
 app.secret_key = "This is a secret key"
 
@@ -14,28 +15,28 @@ list_of_users = [
      "id" : 3}
 ]
 
-list_of_todos = [
-    {"description" : "Learn Python",
-     "status" : "complete",
-     "id" : "1",
-     "user_id" : "1"
-    },
-    {"description" : "Learn OOP",
-     "status" : "complete",
-     "id" : "2",
-     "user_id" : "1"
-    },
-    {"description" : "Learn routes in Flask",
-     "status" : "in_progress",
-     "id" : "3",
-     "user_id" : "2"
-    },
-    {"description" : "Learn POST",
-     "status" : "in_progress",
-     "id" : "4",
-     "user_id" : "3"
-    }
-]
+# list_of_todos = [
+#     {"description" : "Learn Python",
+#      "status" : "complete",
+#      "id" : "1",
+#      "user_id" : "1"
+#     },
+#     {"description" : "Learn OOP",
+#      "status" : "complete",
+#      "id" : "2",
+#      "user_id" : "1"
+#     },
+#     {"description" : "Learn routes in Flask",
+#      "status" : "in_progress",
+#      "id" : "3",
+#      "user_id" : "2"
+#     },
+#     {"description" : "Learn POST",
+#      "status" : "in_progress",
+#      "id" : "4",
+#      "user_id" : "3"
+#     }
+# ]
 
 @app.route('/todos')
 def get_todos():
@@ -43,6 +44,7 @@ def get_todos():
         return redirect('/user/login')
     logged_uid = int(session['logged_in_user'])
     user_acct = list_of_users[logged_uid-1]
+    list_of_todos = Todo.get_all()
     return render_template('todos.html', todos = list_of_todos, user = user_acct)
 
 @app.route('/todo/form')
@@ -51,22 +53,19 @@ def display_todo_form():
         return redirect('/user/login')
     logged_uid = int(session['logged_in_user'])
     user_acct = list_of_users[logged_uid-1]
-    next_todo_id = len(list_of_todos) + 1
-    return render_template( 'todo_form.html', users = list_of_users, user = user_acct, todo_id = next_todo_id)
+    return render_template( 'todo_form.html', users = list_of_users, user = user_acct)
 
 @app.route('/todo/new', methods=['POST'])
 def create_todo():
     print(request.form)
-    # new_todo = {
-    #     "id" : int(request.form['id']),
-    #     "description" : request.form['description'],
-    #     "status" : request.form['status'],
-    #     "user_id" : int(request.form['user_id'])
-    # }
-    # list_of_todos.append(new_todo)
     if session['logged_in_user'] != request.form['user_id']:
         return "Hey that's not you"
-    else: list_of_todos.append(request.form)
+    else:
+        new_todo = {"description" : request.form['description'],
+                    "status" : request.form['status'],
+                    "user_id" : int(request.form['user_id'])
+                    }
+        Todo.create(new_todo)
     return redirect('/todos')
 
 @app.route('/user/login')

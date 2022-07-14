@@ -12,7 +12,7 @@
     <h3>Welcome {{user.first_name}}!</h3>
     <ul>
         {% for todo in todos: %}
-            <li>ID: {{todo['id']}} Todo: {{todo['description']}} Status: {{todo['status']}} User ID: {{todo['user_id']}}</li>
+            <li>ID: {{todo.id}} Todo: {{todo.description}} Status: {{todo.status}} User ID: {{todo.user_id}}</li>
         {% endfor %}
     </ul>
     <a href="/todo/form">Add a todo</a><br>
