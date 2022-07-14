@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Read (One)</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    </head>
+    <body>
+        <div class="container border border-dark rounded mt-4">
+            <h1 class="bg-secondary p-3 m-0">User {{ user.id }}</h1>
+            <a href="/users">Home</a>
+            <div class="container align-left border border-dark m-3 p-3">
+                <h4>Full Name: {{ user.first_name }} {{user.last_name }}</h4>
+                <h4>Email: {{ user.email }}</h4>
+                <h4>Created On: {{ user.created_at }}</h4>
+                <h4>Last Updated On: {{ user.updated_at }}</h4>
+            </div>
+            <a href="/users/{{ user.id }}/edit">Edit</a>  |  <a href="/users/{{ user.id }}/destroy">Delete</a>
+        </div>
+    </body>
+</html>
