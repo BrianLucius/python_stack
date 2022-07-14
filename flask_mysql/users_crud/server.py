@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect
 
 from user import User
 
 app = Flask(__name__)
 
+@app.route("/")
 @app.route("/users")
 def users_list_all():
     users = User.get_all()
@@ -15,23 +16,13 @@ def create_new_user():
 
 @app.route("/users/add_user", methods=['POST'])
 def add_new_user():
-    data = {"fname": request.form["fname"],
-            "lname": request.form["lname"],
-            "email": request.form["email"]
-        }
-    new_user_id = User.save(data)
-    return redirect(url_for('display_single_user_by_id', user_id = new_user_id))
+    new_user_id = User.save(request.form)
+    return redirect(f"/users/{new_user_id}")
 
 @app.route("/users/update_user", methods=['POST'])
 def update_single_user_by_id():
-    print(request.form)
-    data = {"user_id": request.form["user_id"],
-            "fname": request.form["fname"],
-            "lname": request.form["lname"],
-            "email": request.form["email"]
-        }
-    user_id = User.update_single_user_by_id(data)
-    return redirect(url_for('display_single_user_by_id', user_id = user_id))
+    User.update_single_user_by_id(request.form)
+    return redirect(f"/users/{request.form['user_id']}")
 
 @app.route("/users/delete_user", methods=['POST'])
 def delete_single_user_by_id():

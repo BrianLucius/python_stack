@@ -23,19 +23,19 @@ class User:
     def get_single_user_by_id(cls, data):
         query = "SELECT id, first_name, last_name, email, created_at, updated_at FROM users WHERE id=%(user_id)s;"
         results = connectToMySQL('users_schema').query_db(query, data)
-        return results[0]
+        return cls(results[0])
 
     @classmethod
     def update_single_user_by_id(cls, data):
         query = "UPDATE users SET first_name = %(fname)s, last_name = %(lname)s, email = %(email)s WHERE id=%(user_id)s;"
         connectToMySQL('users_schema').query_db(query, data)
-        return data['user_id']
+        return
 
     @classmethod
     def delete_single_user_by_id(cls, data):
         query = "DELETE FROM users WHERE id=%(user_id)s;"
         connectToMySQL('users_schema').query_db(query, data)
-        return data['user_id']
+        return
 
     @classmethod
     def save(cls, data):
