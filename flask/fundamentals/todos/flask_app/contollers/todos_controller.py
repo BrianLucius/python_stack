@@ -23,7 +23,6 @@ def display_todo_form():
 
 @app.route('/todo/new', methods=['POST'])
 def create_todo():
-    print(request.form)
     if session['logged_in_user'] != request.form['user_id']:
         return "Hey that's not you"
     else:
@@ -33,6 +32,33 @@ def create_todo():
                     }
         Todo.create(new_todo)
     return redirect('/todos')
+
+@app.route('/todo/<int:id>/form')
+def display_todo_update_form(id):
+    # Create a method to grab the current todo
+    data = {
+        "id" : id
+    }
+    current_todo = Todo.get_one(data)
+    return render_template('update_todo_form.html', current_todo = current_todo)
+
+@app.route('/todo/<int:id>/update', methods=['POST'])
+def update_todo(id):
+    data = {
+        "id": id,
+        "description": request.form['description'],
+        "status": request.form['status']
+    }
+    Todo.update_one(data)
+    return redirect(f"/user/{session['logged_in_user']}/todos")
+
+@app.route('/todo/<int:id>/delete', methods=['GET'])
+def delete_todo(id):
+    data = {
+        "id": id
+    }
+    Todo.delete_todo(data)
+    return redirect(f"/user/{session['logged_in_user']}/todos")
 
 """
 Method: GET
@@ -57,5 +83,10 @@ Function: display_todo_form()
 Method: POST
 #Creating a new type
 URL: '/todo/new'
-Fucntion: create_todo()
+Function: create_todo()
+
+Method: POST
+#Update todo form
+URL: '/todo/update/form/<int:id>'
+Function: 
 """

@@ -12,7 +12,7 @@
     
     <ul>
         {% for todo in current_user.list_of_todos: %}
-            <li>ID: {{todo.id}} Todo: {{todo.description}} Status: {{todo.status}}</li>
+            <li>ID: {{todo.id}} Todo: {{todo.description}} Status: {{todo.status}} | <a href="/todo/{{todo.id}}/form">Update</a> | <a href="/todo/{{todo.id}}/delete">Delete</a></li>
         {% endfor %}
     </ul>
     <a href="/todos">Go Back Home</a><br>

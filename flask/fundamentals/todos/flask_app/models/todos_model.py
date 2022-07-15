@@ -15,12 +15,10 @@ class Todo:
         query  = "SELECT * "
         query += "FROM todos;"
         result = connectToMySQL(DATABASE).query_db(query)
-        # print(result)
 
         list_todos = []
         for todo in result:
             list_todos.append(cls(todo))
-        # print(list_todos)
         return list_todos
 
     @classmethod
@@ -30,6 +28,32 @@ class Todo:
 
         result = connectToMySQL(DATABASE).query_db(query, data)
         return result
+    
+    @classmethod
+    def get_one(cls, data):
+        query = "SELECT * "
+        query+= "FROM todos "
+        query+= "WHERE todos.id = %(id)s;"
+        
+        result = connectToMySQL(DATABASE).query_db(query, data)
+        if  len(result) > 0:
+            todo = cls(result[0])
+        return todo
+    
+    @classmethod
+    def update_one(cls,data):
+        query = "UPDATE todos "
+        query+= "SET todos.description=%(description)s, todos.status=%(status)s "
+        query+= "WHERE todos.id = %(id)s;"
+
+        return connectToMySQL(DATABASE).query_db(query, data)
+
+    @classmethod
+    def delete_todo(cls,data):
+        query = "DELETE FROM todos "
+        query+= "WHERE todos.id = %(id)s;"
+        
+        return connectToMySQL(DATABASE).query_db(query, data)
 
 """
 SELECT

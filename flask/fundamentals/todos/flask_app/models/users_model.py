@@ -21,7 +21,6 @@ class User:
         query+= "WHERE users.id = %(id)s;"
 
         results = connectToMySQL(DATABASE).query_db(query, data)
-        print(results)
         if len(results) > 0:
             current_user = cls(results[0])
 
