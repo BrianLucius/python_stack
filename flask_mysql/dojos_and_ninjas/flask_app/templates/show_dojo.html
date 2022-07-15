@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Dojo Show</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    </head>
+    <body>
+        <div class="container w-50">
+            <h1>{{ dojo_data.name}} Ninjas</h1>
+            <table class="table table-dark table-striped table-hover">
+                <thead class="text-center text-warning">
+                    <tr>
+                        <td>First Name</td>
+                        <td>Last Name</td>
+                        <td>Age</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ninja in dojo_data.ninjas %}
+                    <tr>
+                        <td>{{ ninja.first_name }}</td>
+                        <td>{{ ninja.last_name }}</td>
+                        <td>{{ ninja.age }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="/dojos">Home</a>
+        </div>
+    </body>
+</html>
