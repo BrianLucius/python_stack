@@ -1,18 +1,7 @@
 from flask_app import app
 from flask_app.models.todos_model import Todo
 from flask import render_template, redirect, request, session
-
-list_of_users = [
-    {"first_name" : "Alex",
-     "last_name" : "Miller",
-     "id" : 1},
-    {"first_name" : "Martha",
-     "last_name" : "Smith",
-     "id" : 2},
-    {"first_name" : "Roger",
-     "last_name" : "Anderson",
-     "id" : 3}
-]
+from flask_app import list_of_users
 
 @app.route('/')
 @app.route('/todos')
@@ -44,22 +33,6 @@ def create_todo():
                     }
         Todo.create(new_todo)
     return redirect('/todos')
-
-@app.route('/user/login')
-def user_login():
-    return render_template("user_login.html", users = list_of_users)
-
-@app.route('/user/process_login', methods=['POST'])
-def process_login():
-    session['logged_in_user'] = request.form['user_id']
-    return redirect('/todos')
-
-@app.route('/user/logout')
-def user_logout():
-    # deleted_id = session.pop('logged_in_user') # will return a value
-    # session.clear() # will clear everything in session
-    del session['logged_in_user'] # works like pop but does not return a value
-    return redirect('/user/login')
 
 """
 Method: GET
