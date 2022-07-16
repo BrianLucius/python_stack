@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Books</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    </head>
+    <body class="bg-secondary bg-opacity-75">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col">
+                    <div class="card text-bg-dark mb-3" style="height:350px">
+                        <div class="card-header text-light"><h1>New Book</h1></div>
+                            <div class="card-body">
+                                <form action="/books/add_new" method="post">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label" for="title">Title</label>
+                                        <input class="form-control" type="text" name="title" id="title">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label" for="pages">Number of Pages</label>
+                                        <input class="form-control" type="number" name="pages" id="pages">
+                                    </div>
+                                    <input class="btn btn-success" type="submit" value="Create">
+                                </form>
+                            </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-bg-dark mb-3" style="height:350px">
+                        <div class="card-header text-light"><h1>All Books</h1></div>
+                            <div class="card-body overflow-scroll">
+                                <ul class="list-group">
+                                    {% for book in books_list %}
+                                    <li class="list-group-item"><a href="/books/{{ book.id }}">{{ book.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <a href="/authors">Home</a>
+        </div>
+    </body>
+</html>
