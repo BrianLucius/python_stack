@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Friendships</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    </head>
+    <body class="bg-secondary">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card text-bg-dark mb-3" style="height:616px">
+                        <div class="card-header text-light"><h1>Friendships</h1></div>
+                        <div class="card-body overflow-scroll">
+                            <table class="table table-dark table-striped table-hover mb-3">
+                                <thead class="text-center text-warning">
+                                    <tr>
+                                        <td>User</td>
+                                        <td>Friend</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for user in friendships_list %}
+                                    <tr>
+                                        <td>{{ user.first_name }} {{ user.last_name }}</td>
+                                        <td>{{ user.friend_first_name }} {{ user.friend_last_name }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="card text-bg-dark mb-3" style="height:350px">
+                            <div class="card-header text-light"><h1>Add User</h1></div>
+                            <div class="card-body">
+                                <form action="/friendships/add_user" method="post">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label" for="first_name">First Name</label>
+                                        <input class="form-control" type="text" name="first_name" id="first_name">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label" for="last_name">Last Name</label>
+                                        <input class="form-control" type="text" name="last_name" id="last_name">
+                                    </div>
+                                    <button class="btn btn-success" type="submit">Add User</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card text-bg-dark" style="height:250px">
+                            <div class="card-header text-light"><h1>Create Friendship</h1></div>
+                            <div class="card-body">
+                                <form action="/friendships/create" method="post">
+                                    <div class="form-group mb-3">
+                                        <div>
+                                            <label class="form-label" for="user_id">User:</label>
+                                            <select class="form_select mb-3" name="user_id">
+                                                {% for user in users_list %}
+                                                <option value={{user.id}}>{{user.first_name}}  {{user.last_name}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="form-label" for="user_id">Friend:</label>
+                                            <select class="form_select mb-3" name="friend_id">
+                                                {% for user in users_list %}
+                                                <option value={{user.id}}>{{user.first_name}}  {{user.last_name}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <button class="btn btn-success" type="submit">Create</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
