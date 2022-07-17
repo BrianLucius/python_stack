@@ -16,5 +16,6 @@ def add_user():
 
 @app.route("/friendships/create", methods=['POST'])
 def create_friendship():
-    User.add_friendship(request.form)
+    if not User.is_friendship(request.form):
+        User.add_friendship(request.form)
     return redirect("/friendships")

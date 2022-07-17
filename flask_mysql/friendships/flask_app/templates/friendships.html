@@ -30,7 +30,7 @@
                                     {% for user in friendships_list %}
                                     <tr>
                                         <td>{{ user.first_name }} {{ user.last_name }}</td>
-                                        <td>{{ user.friend_first_name }} {{ user.friend_last_name }}</td>
+                                        <td>{{ user.friend.first_name }} {{ user.friend.last_name }}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
