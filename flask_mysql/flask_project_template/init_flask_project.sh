@@ -1,2 +1,2 @@
 #!/bin/bash
-pipenv install flask pymysql python-dotenv
+pipenv install flask pymysql python-dotenv flask-bcrypt
