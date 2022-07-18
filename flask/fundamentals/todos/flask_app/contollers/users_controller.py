@@ -3,6 +3,9 @@ from flask_app.models.users_model import User
 from flask import render_template, redirect, request, session, flash
 from flask_app import list_of_users
 
+from flask_bcrypt import Bcrypt
+bcrypt = Bcrypt(app)
+
 @app.route('/user/<int:id>/todos')
 def get_user_by_id_with_todos(id):
     data = {
@@ -11,6 +14,7 @@ def get_user_by_id_with_todos(id):
     current_user = User.get_one_with_todos(data)
     return render_template("user_todos.html", current_user = current_user)
 
+@app.route('/')
 @app.route('/user/login')
 def user_login():
     return render_template("user_login.html", users = list_of_users)
@@ -33,12 +37,14 @@ def process_login():
         "password": request.form['password']
     }
     current_user = User.get_one(data)
-    print(current_user.first_name, current_user.id)
     if current_user is not False:
+        if not bcrypt.check_password_hash(current_user.password, request.form['password']):
+            flash("Invalid Credentials (pass)","error_login_invalid_credentials")
+            return redirect("/user/login")
         session['logged_in_user'] = int(current_user.id)
         return redirect('/todos')
     else:
-        flash("Invalid user credentials","error_login_invalid_credentials")
+        flash("Invalid user credentials (general)","error_login_invalid_credentials")
         return redirect('/user/login')
 
 @app.route('/user/process_registration', methods=['POST'])
@@ -55,7 +61,11 @@ def process_registration():
         flash("That email is already in use. Please choose another email.", "error_registration_email")
         return redirect('/user/login')
 
-    user_id = int(User.create_one(request.form))
+    user_data = {
+        **request.form,
+        "password": bcrypt.generate_password_hash(request.form['password'])
+    }
+    user_id = int(User.create_one(user_data))
     if user_id is not False:
         session['logged_in_user'] = user_id
         return redirect('/todos')

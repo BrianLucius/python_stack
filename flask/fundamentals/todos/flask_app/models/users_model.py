@@ -1,7 +1,12 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.todos_model import Todo
 from flask import flash
+
 from flask_app import DATABASE
+import re
+
+
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class User:
     def __init__(self, data):
@@ -22,7 +27,7 @@ class User:
         query+= "WHERE users.id = %(id)s;"
 
         results = connectToMySQL(DATABASE).query_db(query, data)
-        
+
         if len(results) > 0:
             current_user = cls(results[0])
 
@@ -47,12 +52,12 @@ class User:
     def get_one(cls, data):
         query = "SELECT * "
         query+= "FROM users "
-        query+= "WHERE email=%(email)s AND password = %(password)s;"
+        query+= "WHERE email=%(email)s;"
         result = connectToMySQL(DATABASE).query_db(query, data)
         if len(result) < 1:
             return False
         return cls(result[0])
-        
+
     @classmethod
     def get_one_for_registration(cls, data):
         query = "SELECT * "
@@ -81,6 +86,7 @@ class User:
         if len(data['password']) == 0:
             flash("You must enter a password.", "error_password")
             is_valid = False
+        
         return is_valid
 
     @staticmethod
@@ -94,6 +100,9 @@ class User:
             is_valid = False
         if len(data['email']) < 3:
             flash("Please provide an email","error_registration_email")
+            is_valid = False
+        elif not EMAIL_REGEX.match(data['email']):
+            flash("Email format is not valid.", "error_registration_email")
             is_valid = False
         if len(data['password']) < 8:
             flash("Please provide a password with more than 8 characters","error_registration_password")
