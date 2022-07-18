@@ -1,6 +1,6 @@
 from flask_app import app
 from flask_app.models.users_model import User
-from flask import render_template, redirect, request, session
+from flask import render_template, redirect, request, session, flash
 from flask_app import list_of_users
 
 @app.route('/user/<int:id>/todos')
@@ -24,5 +24,40 @@ def user_logout():
 
 @app.route('/user/process_login', methods=['POST'])
 def process_login():
-    session['logged_in_user'] = request.form['user_id']
-    return redirect('/todos')
+    is_valid = User.validate_login(request.form)
+    if is_valid == False:
+        return redirect('/user/login')
+
+    data = {
+        "email": request.form['email'],
+        "password": request.form['password']
+    }
+    current_user = User.get_one(data)
+    print(current_user.first_name, current_user.id)
+    if current_user is not False:
+        session['logged_in_user'] = int(current_user.id)
+        return redirect('/todos')
+    else:
+        flash("Invalid user credentials","error_login_invalid_credentials")
+        return redirect('/user/login')
+
+@app.route('/user/process_registration', methods=['POST'])
+def process_registration():
+    is_valid = User.validate_registration(request.form)
+    if is_valid is False:
+        return redirect('/user/login')
+
+    data = {
+        "email": request.form['email']
+    }
+    result = User.get_one_for_registration(data)
+    if result is not False:
+        flash("That email is already in use. Please choose another email.", "error_registration_email")
+        return redirect('/user/login')
+
+    user_id = int(User.create_one(request.form))
+    if user_id is not False:
+        session['logged_in_user'] = user_id
+        return redirect('/todos')
+    flash("Something went wrong with the query!", "error_registration_query")
+    return redirect('/user/login')

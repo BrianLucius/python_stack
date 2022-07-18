@@ -35,7 +35,7 @@
                 {% endfor %}
             </select>
         </div> -->
-        <input type="hidden" name="user_id" value="{{session['logged_in_user']}}">
+        <input type="hidden" name="user_id" value="{{ session['logged_in_user'] }}">
         <button type="submit">Submit</button>
     </form>
 </body>
