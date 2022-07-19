@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Registration & Login Page</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    </head>
+    <body class="bg-secondary">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card text-bg-dark mb-3">
+                        <div class="card-header text-primary"><h1>Register</h1></div>
+                        <div class="card-body">
+                            <form action="/register" method="post">
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="first_name">First Name:</label>
+                                    {% for message in get_flashed_messages(category_filter = ['registration_error_first_name']) %}
+                                        <h5 class = "text-danger">{{ message }} </h5>
+                                    {% endfor %}
+                                    <input class="form-control" type="text" name="first_name" id="first_name">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="last_name">Last Name:</label>
+                                    {% for message in get_flashed_messages(category_filter = ['registration_error_last_name']) %}
+                                        <h5 class = "text-danger">{{ message }} </h5>
+                                    {% endfor %}
+                                    <input class="form-control" type="text" name="last_name" id="last_name">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="email">Email Address:</label>
+                                    {% for message in get_flashed_messages(category_filter = ['registration_error_email']) %}
+                                        <h5 class = "text-danger">{{ message }} </h5>
+                                    {% endfor %}
+                                    <input class="form-control" type="text" name="email" id="email">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="dob">Date of Birth:</label>
+                                    {% for message in get_flashed_messages(category_filter = ['registration_error_dob']) %}
+                                        <h5 class = "text-danger">{{ message }} </h5>
+                                    {% endfor %}
+                                    <input class="form-control" type="date" name="dob" id="dob">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="password">Password:</label>
+                                    {% for message in get_flashed_messages(category_filter = ['registration_error_password']) %}
+                                        <h5 class = "text-danger">{{ message }} </h5>
+                                    {% endfor %}
+                                    <input class="form-control" type="password" name="password" id="password">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="confirm_password">Confirm Password:</label>
+                                    {% for message in get_flashed_messages(category_filter = ['registration_error_confirm_password']) %}
+                                        <h5 class = "text-danger">{{ message }} </h5>
+                                    {% endfor %}
+                                    <input class="form-control" type="password" name="confirm_password" id="confirm_password">
+                                </div>
+                                <button class="btn btn-primary" type="submit">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card text-bg-dark mb-3">
+                        <div class="card-header text-success"><h1>Login</h1>
+                            {% for message in get_flashed_messages(category_filter = ['error_login_invalid_credentials']) %}
+                                <h5 class = "text-danger">{{ message }} </h5>
+                            {% endfor %}
+                        </div>
+                        <div class="card-body">
+                            <form action="/login" method="post">
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="email">Email Address:</label>
+                                    {% for message in get_flashed_messages(category_filter = ['login_error_email']) %}
+                                        <h5 class = "text-danger">{{ message }} </h5>
+                                    {% endfor %}
+                                    <input class="form-control" type="text" name="email" id="email">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="password">Password:</label>
+                                    {% for message in get_flashed_messages(category_filter = ['login_error_password']) %}
+                                        <h5 class = "text-danger">{{ message }} </h5>
+                                    {% endfor %}
+                                    <input class="form-control" type="password" name="password" id="password">
+                                </div>
+                                <button class="btn btn-success" type="submit">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
