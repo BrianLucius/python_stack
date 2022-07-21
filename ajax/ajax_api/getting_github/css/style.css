@@ -1,0 +1,11 @@
+img {
+    width : 300px;
+    border-radius: 50%;
+}
+
+.gitUser {
+    width: 30%;
+    border: 2px solid rebeccapurple;
+    padding: 15px;
+    margin-top: 3rem;
+}
