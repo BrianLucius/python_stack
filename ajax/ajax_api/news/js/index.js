@@ -1,5 +1,5 @@
 
-const API_KEY = config.API_KEY
+const API_KEY = config.API_KEY;
 
 async function handleNewsRequest(event) {
     event.preventDefault();

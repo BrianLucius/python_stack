@@ -1,9 +1,8 @@
 async function getWeatherByCity(event, city) {
     event.preventDefault();
 
-    // const API_KEY = config.API_KEY;  //openweathermap.org
     // const API_EXCLUSIONS = "minutely,hourly,alerts";
-    const API_KEY = config.API_KEY        //weatherapi.com
+    const API_KEY = config.API_KEY;
     const locations = {
         "sanjose" : {"lat": "37.33", "lon": "-121.88"},
         "burbank" : {"lat": "34.18", "lon": "-118.30"},
