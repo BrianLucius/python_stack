@@ -8,6 +8,7 @@ flask = "*"
 pymysql = "*"
 bcrypt = "*"
 python-dotenv = "*"
+flask-cors = "*"
 
 [dev-packages]
 

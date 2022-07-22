@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDos App</title>
+</head>
+<body>
+    <h1>New ToDo by {{user['first_name']}}</h1>
+    <form method="POST" action="/todo/new">
+        <div>
+            <label for="description">Description:</label>
+            <input type="text" name="description" id="desciption">
+        </div>
+        <div>
+            <label for="status">Status:</label>
+            <select name="status" id="status">
+                <option value="not_started">Not Started</option>
+                <option value="in_progress">In Progress</option>
+                <option value="complete">Complete</option>
+                <option value="cancel">Cancel</option>
+            </select>
+        </div>
+        <!-- <div> -->
+            <!-- <label for="id">New ToDo ID:</label>
+            <input type="number" name="id" id="id"> -->
+            <input type="hidden" name="id" value="{{todo_id}}">
+        <!-- </div> -->
+        <!-- <div>
+            <label for="user_id">Description:</label>
+            <select name="user_id" id="user_id">
+                {% for user in users: %}
+                <option value="{{user['id']}}">{{user['first_name']}} {{user['last_name']}}</option>
+                {% endfor %}
+            </select>
+        </div> -->
+        <input type="hidden" name="user_id" value="{{ session['logged_in_user'] }}">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
