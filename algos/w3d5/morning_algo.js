@@ -23,6 +23,9 @@ const expected4 = [1];
 
 const nums5 = [5, 1, 4, 1, 5];
 const expected5 = [5, 1]; // or [1,5]
+
+const nums6 = [9,9,9,9,3,3,3,3,1,1]
+const expected6 = [9,3]
 //  - order doesn't matter
 
 /**
@@ -33,34 +36,6 @@ const expected5 = [5, 1]; // or [1,5]
  * @param {Array<number>} nums Test
  * @returns {Array<number>} Mode or modes in any order.
  */
-
- function mode_spencer(nums) {
-    if (nums.length === 1 || nums.length === 0) {
-        return nums;
-    }
-  
-    let modes = [];
-    let maxCount = 0;
-    let allSame = true;
-    let freqs = {}
-  
-    for (let num of nums){
-        freqs[num] = freqs[num] + 1 || 1 ; //builds freq table
-        maxCount = Math.max(maxCount, freqs[num]);
-    }
-    let keycount = 0
-    for (let key in freqs){
-        keycount++
-        if (freqs[key] === maxCount){
-            modes.push(parseInt(key));
-        }else{
-            allSame = false;
-        }
-    }
-    if (keycount == 1) return [nums[0]]
-    return allSame ? [] : modes;
-  
-  }
 
 function makeFrequencyTable(arr) {
     var frequency ={};
@@ -78,41 +53,32 @@ function makeFrequencyTable(arr) {
 }
 
 function mode(nums) {
-    // var 
-    // var 
-    // for (var i=0; i<= ; i++) {
-
-    // }
+    if (nums.length == 0)
+        return [];
     var histogram = makeFrequencyTable(nums);
-    console.log("histogram:", histogram);
 
     const values = Object.values(histogram);
-    console.log("obj values:", values); 
-
     const maxFreq = Math.max(...values);
-    console.log("max value:", maxFreq);
-    // return makeFrequencyTable(nums);
 
     var modes = [];
-    for (var [key, val] of histogram) {
-        console.log(key, val);
-        if (val == maxFreq) {
-            modes+=maxFreq;
+    var i=0;
+    for (key of Object.keys(histogram)) {
+        if (histogram[key] == maxFreq) {
+            modes[i] = key;
+            i++;
         }
     }
+    if (nums.length > 1 && modes.length == nums.length)
+        return [];
     return modes;
-
-    // return histogram.keys() = max;
-
 }
 
-// console.log(mode(nums1)) // []
-// console.log(mode(nums2)) // [1]
-// console.log(mode(nums3)) // []
-// console.log(mode(nums4)) // [1]
+console.log(mode(nums1)) // []
+console.log(mode(nums2)) // [1]
+console.log(mode(nums3)) // []
+console.log(mode(nums4)) // [1]
 console.log(mode(nums5)) // [5, 1]
-
-
+console.log(mode(nums6)) // [9, 3]
 
 // // Caleb's implementation:
 // function mode(nums) {
@@ -158,3 +124,31 @@ console.log(mode(nums5)) // [5, 1]
 //     }
 //     return frequencyCount;
 // }
+
+// function mode_spencer(nums) {
+//     if (nums.length === 1 || nums.length === 0) {
+//         return nums;
+//     }
+
+//     let modes = [];
+//     let maxCount = 0;
+//     let allSame = true;
+//     let freqs = {}
+
+//     for (let num of nums){
+//         freqs[num] = freqs[num] + 1 || 1 ; //builds freq table
+//         maxCount = Math.max(maxCount, freqs[num]);
+//     }
+//     let keycount = 0
+//     for (let key in freqs){
+//         keycount++
+//         if (freqs[key] === maxCount){
+//             modes.push(parseInt(key));
+//         }else{
+//             allSame = false;
+//         }
+//     }
+//     if (keycount == 1) return [nums[0]]
+//     return allSame ? [] : modes;
+
+//   }
