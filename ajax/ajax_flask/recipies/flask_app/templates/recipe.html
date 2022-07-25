@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>View Recipe</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    </head>
+    <body class="bg-secondary">
+        <div class="container mt-4">
+            <div class="row rounded bg-dark text-light mb-2 p-3 align-items-center">
+                <div class="col-10">
+                    <h1 class="text-success">Welcome, {{ session['first_name'] }}</h1>
+                </div>
+                <div class="col-1">
+                    <h5><a href="/recipes">Back to Recipes</a></h5>
+                </div>
+                <div class="col-1">
+                    <h5><a href="/user/logout">Logout</a></h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card text-bg-dark mb-3">
+                    <div class="card-header p-3">
+                        <div class="row align-items-center">
+                            <div class="col-9">
+                                <h2>{{ current_recipe.name }}</h2>
+                            </div>
+                            <div class="col-3">
+                                <h5>Posted by: {{ current_recipe.user.first_name }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="border p-3">
+                            <div class="row p-2">
+                                <div class="col-3">
+                                    <h5>Description:</h5>
+                                </div>
+                                <div class="col-9">
+                                    <h5>{{ current_recipe.description }}</h5>
+                                </div>
+                            </div>
+                            <div class="row p-2">
+                                <div class="col-3">
+                                    <h5>Under 30 Minutes:</h5>
+                                </div>
+                                <div class="col-9">
+                                    <h5>{% if current_recipe.under_30 == 1: %} Yes {% else: %} No {% endif %}</h5>
+                                </div>
+                            </div>
+                            <div class="row p-2">
+                                <div class="col-3">
+                                    <h5>Instructions:</h5>
+                                </div>
+                                <div class="col-9">
+                                    <h5>{{ current_recipe.instructions }}</h5>
+                                </div>
+                            </div>
+                            <div class="row p-2">
+                                <div class="col-3">
+                                    <h5>Date Made:</h5>
+                                </div>
+                                <div class="col-9">
+                                    <h5>{{ current_recipe.cooked_date.strftime('%B %d, %Y') }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
