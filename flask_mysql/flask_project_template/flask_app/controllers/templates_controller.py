@@ -1,5 +1,5 @@
 from flask_app import app
-from flask_app.models.templates_model import MyClassname
+from flask_app.models.template_model import MyClassname
 from flask import render_template, request, redirect
 
 @app.route("/")
